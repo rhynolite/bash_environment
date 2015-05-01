@@ -1,0 +1,15 @@
+bash_prompt() {
+  local status=$(git status 2> /dev/null | grep 'working directory clean')
+  local dirty=''
+  if [ -z "$status" ]; then
+    local dirty='*'
+  fi
+  local branch=$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/\1/")
+  if [ -z "$branch" ]; then
+    export PS1="[$(date +%H:%M) \u@\h:\W] "
+  else
+    export PS1="[$(date +%H:%M) \u@\\h:\W $branch$dirty] "
+  fi
+}
+
+export PROMPT_COMMAND="bash_prompt; $PROMPT_COMMAND"

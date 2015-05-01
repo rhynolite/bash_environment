@@ -1,0 +1,3 @@
+export GOPATH=$HOME/go
+mkdir -p $GOPATH
+PATH=${PATH}:${GOPATH}/bin
