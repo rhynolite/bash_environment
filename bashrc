@@ -1,5 +1,5 @@
 LIBS_DIR=utilities
-LOGIN_DIR=login
+MODULES_DIR=modules 
 
 load_dir() {
 	D=$1 
@@ -11,4 +11,4 @@ load_dir() {
 }
 
 load_dir $LIBS_DIR 
-load_dir $LOGIN_DIR
+load_dir $MODULES_DIR
