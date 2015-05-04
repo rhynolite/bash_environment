@@ -7,8 +7,10 @@ bash_prompt() {
   local branch=$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/\1/")
   if [ -z "$branch" ]; then
     export PS1="[$(date +%H:%M) \u@\h:\W] "
+    echo -ne "\033]0;$(basename $(pwd))\007"
   else
     export PS1="[$(date +%H:%M) \u@\\h:\W $branch$dirty] "
+    echo -ne "\033]0;$branch$dirty\007"
   fi
 }
 
