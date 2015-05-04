@@ -1,5 +1,9 @@
 bash_prompt() {
   local status=$(git status 2> /dev/null | grep 'working directory clean')
+  local git_repo=""
+  if git show -v >/dev/null 2>&1 ; then 
+    git_repo=$(basename $(git remote -v  | grep push  | awk '{print $2}') | sed 's/.git$//g')
+  fi
   local dirty=''
   if [ -z "$status" ]; then
     local dirty='*'
@@ -10,7 +14,7 @@ bash_prompt() {
     echo -ne "\033]0;$(basename $(pwd))\007"
   else
     export PS1="[$(date +%H:%M) \u@\\h:\W $branch$dirty] "
-    echo -ne "\033]0;$branch$dirty\007"
+    echo -ne "\033]0;$git_repo:$branch$dirty\007"
   fi
 }
 
